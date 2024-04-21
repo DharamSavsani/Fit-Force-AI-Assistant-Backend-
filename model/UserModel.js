@@ -27,7 +27,8 @@ const userSchema = mongoose.Schema({
     minlength: 6, // Optional: Enforce minimum password length
   },
   userSate: {
-    default: {},
+    type: Object,
+    default: null,
     mentalHealthRating: {
       type: Number,
       min: 1,

@@ -45,6 +45,7 @@ UserRouter.post("/loginUser", async (req, res) => {
 
 UserRouter.post("/userSate", async (req, res) => {
   try {
+    const _id = req.body._id;
     const newState = {
       mentalHealthRating: 10,
       physicalHealthRating: 10,
@@ -57,14 +58,18 @@ UserRouter.post("/userSate", async (req, res) => {
       wellnessActivities: "String",
       challenges: "String",
     };
-    const user = await UserModel.findOneAndUpdate(
-      { userName: req.body.userName },
-      { userState: newState },
-      { new: true }
+
+    if (!newState) {
+      return res.status(400).json({ error: "UserState data is required" });
+    }
+    UserModel.findByIdAndUpdate({ _id }, { $set: { [userSate]: newState } }).then(
+      (v) => {
+        res.send(v);
+      }
     );
-    res.send(user);
-  } catch (err) {
-    res.status(500).send({ err: err });
+  } catch (error) {
+    console.error("Error updating user state:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
