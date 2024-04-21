@@ -26,6 +26,27 @@ const userSchema = mongoose.Schema({
     required: true,
     minlength: 6, // Optional: Enforce minimum password length
   },
+  userSate: {
+    default: {},
+    mentalHealthRating: {
+      type: Number,
+      min: 1,
+      max: 10,
+    },
+    physicalHealthRating: {
+      type: Number,
+      min: 1,
+      max: 10,
+    },
+    mentalHealthFactors: String,
+    physicalHealthFactors: String,
+    stressFrequency: String,
+    sleepQuality: String,
+    previousAppsUsed: String,
+    motivationLevel: String,
+    wellnessActivities: String,
+    challenges: String,
+  },
 });
 
 const UserModel = mongoose.model("users", userSchema);

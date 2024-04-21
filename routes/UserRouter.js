@@ -36,10 +36,35 @@ UserRouter.post("/loginUser", async (req, res) => {
     if (!passwordMatch) {
       return res.status(401).send("Incorrect password");
     }
-    
+
     res.status(200).send(user);
   } catch (err) {
     res.status(500).send(err);
+  }
+});
+
+UserRouter.post("/userSate", async (req, res) => {
+  try {
+    const newState = {
+      mentalHealthRating: 10,
+      physicalHealthRating: 10,
+      mentalHealthFactors: "String",
+      physicalHealthFactors: "String",
+      stressFrequency: "String",
+      sleepQuality: "String",
+      previousAppsUsed: "String",
+      motivationLevel: "String",
+      wellnessActivities: "String",
+      challenges: "String",
+    };
+    const user = await UserModel.findOneAndUpdate(
+      { userName: req.body.userName },
+      { userState: newState },
+      { new: true }
+    );
+    res.send(user);
+  } catch (err) {
+    res.status(500).send({ err: err });
   }
 });
 
