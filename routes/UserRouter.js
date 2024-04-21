@@ -22,7 +22,7 @@ UserRouter.post("/registerUser", async (req, res) => {
   }
 });
 
-UserRouter.get("/loginUser", async (req, res) => {
+UserRouter.post("/loginUser", async (req, res) => {
   try {
     const user = await UserModel.findOne({ userName: req.body.userName });
     if (!user) {
