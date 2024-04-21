@@ -16,9 +16,6 @@ app.use(cors());
 const UserRouter = require("./routes/UserRouter");
 app.use("/users", UserRouter);
 
-const CommunityRouter = require("./routes/CommunityRouter");
-app.use(CommunityRouter);
-
 // Socket Settings
 
 io.on("connection", (socket) => {
