@@ -8,6 +8,7 @@ const server = createServer(app);
 const io = new Server(server);
 
 io.on("connection", (socket) => {
+  console.log("object")
   socket.on("chat message", (msg) => {
     console.log("message: " + msg);
   });
