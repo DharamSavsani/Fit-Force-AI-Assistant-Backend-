@@ -16,6 +16,7 @@ UserRouter.post("/registerUser", async (req, res) => {
       email: req.body.email,
       password: hashedPassword,
     }).save();
+    delete user.password;
     res.status(200).send(user);
   } catch (err) {
     res.status(500).send(err);
@@ -36,7 +37,7 @@ UserRouter.post("/loginUser", async (req, res) => {
     if (!passwordMatch) {
       return res.status(401).send("Incorrect password");
     }
-
+    delete user.password;
     res.status(200).send(user);
   } catch (err) {
     res.status(500).send(err);
