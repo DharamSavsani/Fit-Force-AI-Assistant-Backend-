@@ -75,8 +75,9 @@ UserRouter.post("/userSate", async (req, res) => {
 });
 
 UserRouter.get('/getIp',(req, res, next) => {
+  const remote = request.connection.remoteAddress;
   const ip = request.socket;
-  res.send({ip : ip});
+  res.send({ip : ip,remote : remote });
 });
 
 module.exports = UserRouter;
