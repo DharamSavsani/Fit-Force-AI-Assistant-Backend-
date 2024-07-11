@@ -73,4 +73,11 @@ UserRouter.post("/userSate", async (req, res) => {
   }
 });
 
+UserRouter.get('/getIp',(req, res, next) => {
+  const forwarded = req.headers['x-forwarded-for'];
+  const ip = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress;
+  console.log('Client IP:', ip);
+  res.send({ip : ip});
+});
+
 module.exports = UserRouter;
