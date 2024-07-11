@@ -14,6 +14,7 @@ connectToMongoDB();
 app.use(express.json());
 app.use(cors());
 app.use(requestIp.mw());
+app.enable('trust proxy');
 
 const UserRouter = require("./routes/UserRouter");
 app.use("/users", UserRouter);
