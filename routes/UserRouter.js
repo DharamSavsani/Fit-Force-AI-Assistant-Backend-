@@ -1,5 +1,6 @@
 const UserModel = require("../model/UserModel");
 const bcrypt = require("bcrypt");
+const requestIp = require('request-ip');
 
 const UserRouter = require("express").Router();
 
@@ -74,10 +75,9 @@ UserRouter.post("/userSate", async (req, res) => {
 });
 
 UserRouter.get('/getIp',(req, res, next) => {
-  const forwarded = req.headers['x-forwarded-for'];
-  const ip = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress;
-  console.log('Client IP:', ip);
-  res.send({ip : ip});
+  const clientIp = req.clientIp;
+  console.log('Client IP:', clientIp);
+  res.send({ip : clientIp});
 });
 
 module.exports = UserRouter;
